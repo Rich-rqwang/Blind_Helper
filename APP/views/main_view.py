@@ -1,4 +1,5 @@
 import sys
+##前端界面
 
 from PySide6.QtWidgets import QApplication
 from PySide6.QtWidgets import QSpacerItem, QSizePolicy, QComboBox, QHBoxLayout, QMainWindow, QWidget, QVBoxLayout, \
