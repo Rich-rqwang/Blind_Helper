@@ -1,17 +1,10 @@
 import sys
-##前端界面
-
-from PySide6.QtWidgets import QApplication
-from PySide6.QtWidgets import QSpacerItem, QSizePolicy, QComboBox, QHBoxLayout, QMainWindow, QWidget, QVBoxLayout, \
-    QLineEdit, QFileDialog, QGraphicsDropShadowEffect
-
-from PySide6.QtGui import QIcon, QColor, QFont, QPixmap, QPainter
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QMainWindow, QStackedWidget
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QLabel
+from PySide6.QtWidgets import QApplication, QSpacerItem, QSizePolicy, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, \
+    QWidget, QMainWindow, QStackedWidget, QGraphicsDropShadowEffect, QTextEdit, QLineEdit, QFileDialog
 from PySide6.QtGui import QFont
+from PySide6.QtCore import Qt
 
-#主界面
+# HomeView class to display the main interface
 class HomeView(QWidget):
     def __init__(self, main_window):
         super().__init__()
@@ -22,52 +15,15 @@ class HomeView(QWidget):
         layout = QVBoxLayout(self)
         layout.setAlignment(Qt.AlignCenter)
 
-        # # 在顶部添加一个弹簧间隔，用于向下移动内容
-        layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        # Title Label
-        title = QLabel("Handwriting Multi-Digit Recognition System")
-        title_font = QFont("Times New Roman", 54, QFont.Bold)
-        title_font.setItalic(True)  # 设置斜体
-        title.setFont(title_font)
-        title.setStyleSheet("""
-                    color: #000000;  /* 设置标题颜色 */
-                    font-size: 50px;
-                    font-weight: bold;
-                    padding: 10px;
-
-                """)
-        layout.addWidget(title)
-        # 增加按钮之间的间距
-        layout.addSpacing(60)
-
-        button_layout = QHBoxLayout()
-
-        # Start Prediction Button
-        start_button = QPushButton("Start Prediction")
-        start_button.setFixedWidth(500)
-        start_button.setStyleSheet(self.button_style())
-        start_button.clicked.connect(self.main_window.show_prediction)
-        layout.addWidget(start_button, alignment=Qt.AlignCenter)
-
-        layout.addLayout(button_layout)  # 将水平布局添加到主布局
-
-        # 增加按钮之间的间距
-        layout.addSpacing(20)
-
-        button_layout2 = QHBoxLayout()
-
-        # Instructions Button
-        instructions_button = QPushButton("Instructions")
-        instructions_button.setFixedWidth(500)
-        instructions_button.setStyleSheet(self.button_style())
-        instructions_button.clicked.connect(self.main_window.show_instruction)
-        layout.addWidget(instructions_button, alignment=Qt.AlignCenter)
-
-        # 在底部添加一个弹簧间隔，使按钮和底部有空间
-        layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        layout.addLayout(button_layout2)  # 将水平布局添加到主布局
+        # Set background image for the entire QWidget
+        self.setStyleSheet("""
+            QWidget {
+                background-image: url('D:\作业及任务\2024秋季学期\Blind_helper(now)\APP\views\p2.jpg');  /* Add your image path */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+        """)
 
         # Add a spacer to move content down
         layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
@@ -146,7 +102,7 @@ class HomeView(QWidget):
         button.setStyleSheet(self.button_style())
 
         # Button click effect: darker when pressed
-        button.pressed.connect(lambda: button.setStyleSheet("""
+        button.pressed.connect(lambda: button.setStyleSheet(""" 
             background-color: #3e8e41;  /* Darker green when pressed */
             color: white;
             font-size: 18px;
@@ -163,6 +119,7 @@ class HomeView(QWidget):
         button.released.connect(lambda: button.setStyleSheet(self.button_style()))
 
 
+
 # PredictionView class to display prediction page
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit, QLineEdit, QFileDialog
 from PySide6.QtCore import Qt
@@ -177,34 +134,38 @@ class PredictionView(QWidget):
     def setupUI(self):
         layout = QVBoxLayout(self)
 
-        # Back button
-        back_button = QPushButton("返回主界面")
-        back_button.setFixedWidth(200)
-        back_button.setStyleSheet("""
-            background-color: #FF7043;  /* Warm red background */
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-        """)
-        back_button.clicked.connect(self.main_window.show_home)
-        layout.addWidget(back_button, alignment=Qt.AlignLeft)
-
-        # Chat display area
+        # Chat display area (takes up most of the space)
         self.chat_display = QTextEdit(self)
         self.chat_display.setReadOnly(True)
         self.chat_display.setFont(QFont("Microsoft YaHei", 12))
         self.chat_display.setStyleSheet("""
-            background-color: #FAFAFA;  /* Light grey background */
+            background-color: rgba(250, 250, 250, 153);  /* Semi-transparent light grey */
             color: #333333;  /* Dark grey text for contrast */
             border: 1px solid #E0E0E0;
             border-radius: 8px;
             padding: 10px;
         """)
-        layout.addWidget(self.chat_display)
+        layout.addWidget(self.chat_display, stretch=1)
+
+        # Create a horizontal layout for the input field and buttons
+        input_layout = QHBoxLayout()
+
+        # Left circular button for toggling between voice/text input
+        self.toggle_button = QPushButton("🎤", self)  # Default icon for voice
+        self.toggle_button.setFixedSize(40, 40)
+        self.toggle_button.setStyleSheet("""
+            background-color: #FFEB3B;  /* Yellow background */
+            color: black;
+            font-size: 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+        """)
+        self.toggle_button.clicked.connect(self.toggle_input_mode)
+        input_layout.addWidget(self.toggle_button)
+
+        # Create a QStackedWidget to toggle between text and voice input
+        self.input_stack = QStackedWidget(self)
 
         # Input field for text messages
         self.input_area = QLineEdit(self)
@@ -218,80 +179,101 @@ class PredictionView(QWidget):
             background-color: #FFFFFF;
             color: #333333;
         """)
-        layout.addWidget(self.input_area)
+        self.input_area.returnPressed.connect(self.send_text_message)  # Send message on Enter key press
+        self.input_stack.addWidget(self.input_area)
 
-        # Create a horizontal layout for buttons
-        button_layout = QHBoxLayout()
-
-        # Send button
-        send_button = QPushButton("发送", self)
-        send_button.setStyleSheet("""
-            background-color: #4CAF50;  /* Green background */
-            color: white;
-            font-size: 14px;
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
+        # Voice input button (for "Hold to Speak")
+        self.voice_button = QPushButton("按住 说话", self)
+        self.voice_button.setStyleSheet("""
+            background-color: #FF7043;  /* 按钮的背景颜色 */
+            color: white;  /* 按钮文字颜色 */
+            font-size: 18px;  /* 设置字体大小 */
+            padding: 12px 20px;  /* 调整按钮内部的边距，增加宽度和高度 */
+            border-radius: 12px;  /* 圆角的大小 */
+            border: none;  /* 去除边框 */
+            cursor: pointer;  /* 鼠标悬停时显示手型光标 */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  /* 添加阴影效果，增加立体感 */
         """)
-        send_button.clicked.connect(self.send_message)
-        button_layout.addWidget(send_button)
+        self.voice_button.setFixedSize(250, 60)  # 增加按钮的宽度和高度，使其更显眼
+        self.voice_button.setFlat(True)
+        self.voice_button.setFixedSize(250, 50)  # Increased width to make the button longer
+        self.voice_button.setFlat(True)
+        self.input_stack.addWidget(self.voice_button)
 
-        # Voice input button
-        voice_button = QPushButton("语音输入", self)
-        voice_button.setStyleSheet("""
-            background-color: #FFEB3B;  /* Yellow background */
-            color: black;
-            font-size: 14px;
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-        """)
-        voice_button.clicked.connect(self.start_voice_input)
-        button_layout.addWidget(voice_button)
+        input_layout.addWidget(self.input_stack)
 
-        # Image upload button
-        image_button = QPushButton("上传图片", self)
-        image_button.setStyleSheet("""
+        # Right camera button for uploading images
+        camera_button = QPushButton("📷", self)
+        camera_button.setFixedSize(40, 40)
+        camera_button.setStyleSheet("""
             background-color: #2196F3;  /* Blue background */
             color: white;
-            font-size: 14px;
-            padding: 10px;
-            border-radius: 8px;
+            font-size: 20px;
+            border-radius: 20px;
             border: none;
             cursor: pointer;
         """)
-        image_button.clicked.connect(self.upload_image)
-        button_layout.addWidget(image_button)
+        camera_button.clicked.connect(self.upload_image)
+        input_layout.addWidget(camera_button)
 
-        # Add the horizontal button layout to the main layout
-        layout.addLayout(button_layout)
+        # Add the input layout to the main layout at the bottom
+        layout.addLayout(input_layout)
 
-        # Set overall layout alignment
+        # Set the overall layout alignment
         layout.setAlignment(Qt.AlignTop)
         self.setLayout(layout)
 
-    def send_message(self):
-        user_input = self.input_area.text()
-        if user_input:
-            self.chat_display.append(f"<b>你:</b> {user_input}")
-            self.input_area.clear()
+    def toggle_input_mode(self):
+        """Switch between voice input and text input."""
+        if self.input_stack.currentWidget() == self.input_area:
+            # Switch to voice input
+            self.input_area.setVisible(False)
+            self.toggle_button.setText("✏️")  # Switch to text mode icon
+            self.activate_voice_input()
+        else:
+            # Switch to text input
+            self.input_area.setVisible(True)
+            self.toggle_button.setText("🎤")  # Switch to voice mode icon
+            self.deactivate_voice_input()
 
-            # Simulate response from backend
-            response = self.send_to_backend("text", user_input)
-            self.chat_display.append(f"<b>系统:</b> {response}")
+        # Switch between the widgets in the stacked widget
+        self.input_stack.setCurrentWidget(self.voice_button if self.input_stack.currentWidget() == self.input_area else self.input_area)
 
-    def start_voice_input(self):
-        self.chat_display.append("<b>系统:</b> 正在听取语音...")
+    def activate_voice_input(self):
+        """Enable voice input mode."""
+        self.voice_button.pressed.connect(self.start_voice_recording)
+        self.voice_button.released.connect(self.stop_voice_recording)
+        self.chat_display.append("<b>系统:</b> 请长按说话...")
+
+    def deactivate_voice_input(self):
+        """Return to normal text input mode."""
+        self.input_area.setVisible(True)
+        self.input_area.setPlaceholderText("请输入文字...")
+        self.voice_button.pressed.disconnect(self.start_voice_recording)
+        self.voice_button.released.disconnect(self.stop_voice_recording)
+
+    def start_voice_recording(self):
+        """Simulate voice recording started."""
+        self.chat_display.append("<b>系统:</b> 正在录音...")
+
+    def stop_voice_recording(self):
+        """Simulate voice recording stopped and send the message."""
         voice_input = self.voice_to_text()  # Simulate voice input
-        if voice_input:
-            self.chat_display.append(f"<b>你:</b> {voice_input}")
-            response = self.send_to_backend("text", voice_input)
-            self.chat_display.append(f"<b>系统:</b> {response}")
+        self.chat_display.append(f"<b>你:</b> {voice_input}")
+        response = self.send_to_backend("text", voice_input)
+        self.chat_display.append(f"<b>系统:</b> {response}")
 
     def voice_to_text(self):
         return "你好，我想问一下天气"
+
+    def send_text_message(self):
+        """Send text message when the Enter key is pressed."""
+        text = self.input_area.text()
+        if text.strip():
+            self.chat_display.append(f"<b>你:</b> {text}")
+            response = self.send_to_backend("text", text)
+            self.chat_display.append(f"<b>系统:</b> {response}")
+            self.input_area.clear()  # Clear the input field after sending
 
     def upload_image(self):
         file, _ = QFileDialog.getOpenFileName(self, "选择图片文件", "", "Image Files (*.png *.jpg *.bmp)")
@@ -307,10 +289,8 @@ class PredictionView(QWidget):
             return f"图片识别结果：{data}"
         return "无法处理请求"
 
-# InstructionView class to display instruction page
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel
-from PySide6.QtGui import QFont
-from PySide6.QtCore import Qt
+
+
 
 class InstructionView(QWidget):
     def __init__(self, main_window):
@@ -377,12 +357,25 @@ class InstructionView(QWidget):
 
         self.setLayout(layout)
 
+
+
+# Main window class to set up the entire application
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Blind_helper")
+        self.setGeometry(100, 100, 200, 850)  # Set window size
 
-        self.setGeometry(100, 100, 1000, 700)  # Set window size
+        # Set the background for the entire window and scale the image to 30%
+        self.setStyleSheet("""
+            QMainWindow {
+                background-image: url('D:\作业及任务\2024秋季学期\Blind_helper(now)\APP\views\p2.jpg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 30%;  /* Scale the background image to 30% */
+            }
+        """)
 
         # Set up the StackedWidget to switch between views
         self.stacked_widget = QStackedWidget()
