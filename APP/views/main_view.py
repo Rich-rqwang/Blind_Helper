@@ -1,5 +1,4 @@
 import sys
-<<<<<<< HEAD
 
 from PySide6.QtWidgets import QApplication
 from PySide6.QtWidgets import QSpacerItem, QSizePolicy, QComboBox, QHBoxLayout, QMainWindow, QWidget, QVBoxLayout, \
@@ -11,16 +10,7 @@ from PySide6.QtWidgets import QMainWindow, QStackedWidget
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QLabel
 from PySide6.QtGui import QFont
 
-
-##主界面
-=======
-from PySide6.QtWidgets import QApplication, QSpacerItem, QSizePolicy, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, \
-    QWidget, QMainWindow, QStackedWidget, QGraphicsDropShadowEffect, QTextEdit, QLineEdit, QFileDialog
-from PySide6.QtGui import QFont
-from PySide6.QtCore import Qt
-
-# HomeView class to display the main interface
->>>>>>> origin/main
+#主界面
 class HomeView(QWidget):
     def __init__(self, main_window):
         super().__init__()
@@ -31,7 +21,6 @@ class HomeView(QWidget):
         layout = QVBoxLayout(self)
         layout.setAlignment(Qt.AlignCenter)
 
-<<<<<<< HEAD
         # # 在顶部添加一个弹簧间隔，用于向下移动内容
         layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -79,8 +68,6 @@ class HomeView(QWidget):
 
         layout.addLayout(button_layout2)  # 将水平布局添加到主布局
 
-
-=======
         # Add a spacer to move content down
         layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -389,28 +376,11 @@ class InstructionView(QWidget):
 
         self.setLayout(layout)
 
-
-
-# Main window class to set up the entire application
->>>>>>> origin/main
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Blind_helper")
-<<<<<<< HEAD
-        self.setGeometry(100, 100, 1000, 700)  # size
-        # self.setWindowIcon(QIcon('icon.png'))
 
-        # Set up the StackedWidget for switching between Home and Prediction views
-        self.stacked_widget = QStackedWidget()
-        self.home_view = HomeView(self)
-
-        # Add views to the stacked widget
-        self.stacked_widget.addWidget(self.home_view)
-
-        self.setCentralWidget(self.stacked_widget)
-
-=======
         self.setGeometry(100, 100, 1000, 700)  # Set window size
 
         # Set up the StackedWidget to switch between views
@@ -438,13 +408,9 @@ class MainWindow(QMainWindow):
         self.stacked_widget.setCurrentWidget(self.instruction_view)
 
 
->>>>>>> origin/main
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     main = MainWindow()
     main.show()
-<<<<<<< HEAD
     sys.exit(app.exec_())
-=======
-    sys.exit(app.exec_())
->>>>>>> origin/main
+
