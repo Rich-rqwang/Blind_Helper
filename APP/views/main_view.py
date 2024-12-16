@@ -18,7 +18,7 @@ class HomeView(QWidget):
         # Set background image for the entire QWidget
         self.setStyleSheet("""
             QWidget {
-                background-image: url('D:\作业及任务\2024秋季学期\Blind_helper(now)\APP\views\p2.jpg');  /* Add your image path */
+                background-image: url('D:\作业及任务\Blind_Helper-main\Blind_Helper-main\APP\views\p1.png');  /* Add your image path */
                 background-position: center;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
@@ -369,7 +369,7 @@ class MainWindow(QMainWindow):
         # Set the background for the entire window and scale the image to 30%
         self.setStyleSheet("""
             QMainWindow {
-                background-image: url('D:\作业及任务\2024秋季学期\Blind_helper(now)\APP\views\p2.jpg');
+                background-image: url('D:/作业及任务/Blind_Helper-main/Blind_Helper-main/APP/views/p2.jpg');
                 background-position: center;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
