@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JupyterPersistentConnectionParameters">
+    <option name="moduleParameters">
+      <map>
+        <entry key="D:/Code/2023.11/23.12.studyGCN/.idea/23.12.studyGCN.iml">
+          <value>
+            <JupyterConnectionParameters>
+              <option name="managed" value="true" />
+              <option name="sdkHomePath" value="D:\ProgramData\Anaconda3\python.exe" />
+            </JupyterConnectionParameters>
+          </value>
+        </entry>
+        <entry key="D:/Code/2023.12/study/.idea/study.iml">
+          <value>
+            <JupyterConnectionParameters>
+              <option name="managed" value="true" />
+              <option name="sdkHomePath" value="D:\ProgramData\Anaconda3\envs\GATCFG\python.exe" />
+            </JupyterConnectionParameters>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

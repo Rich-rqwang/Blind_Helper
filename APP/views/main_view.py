@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import sys
 from PySide6.QtWidgets import QApplication, QSpacerItem, QSizePolicy, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, \
     QWidget, QMainWindow, QStackedWidget, QGraphicsDropShadowEffect, QTextEdit, QLineEdit, QFileDialog
@@ -118,6 +119,13 @@ class HomeView(QWidget):
         # Reset style after release
         button.released.connect(lambda: button.setStyleSheet(self.button_style()))
 
+=======
+from PySide6.QtWidgets import QMainWindow, QStackedWidget
+from PySide6.QtCore import Qt
+from APP.views.home_view import HomeView
+from APP.views.prediction_view import PredictionView
+from APP.views.instruction_view import InstructionView
+>>>>>>> Stashed changes
 
 
 # PredictionView class to display prediction page
@@ -361,8 +369,9 @@ class InstructionView(QWidget):
 
 # Main window class to set up the entire application
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, camera_controller, speech_controller, ai_controller):
         super().__init__()
+<<<<<<< Updated upstream
         self.setWindowTitle("Blind_helper")
         self.setGeometry(100, 100, 200, 850)  # Set window size
 
@@ -384,8 +393,24 @@ class MainWindow(QMainWindow):
         self.home_view = HomeView(self)
         self.prediction_view = PredictionView(self)
         self.instruction_view = InstructionView(self)
+=======
+        self.setWindowTitle("基于大模型的智能对话系统")
+        self.setGeometry(100, 100, 1000, 700)  # 设置窗口大小
 
-        # Add views to the stacked widget
+        self.camera_controller = camera_controller
+        self.speech_controller = speech_controller
+        self.ai_controller = ai_controller
+
+        # 设置堆叠窗口以切换视图
+        self.stacked_widget = QStackedWidget()
+>>>>>>> Stashed changes
+
+        # 创建主页、对话页和使用说明页
+        self.home_view = HomeView(self)
+        self.prediction_view = PredictionView(self, camera_controller, speech_controller, ai_controller)
+        self.instruction_view = InstructionView(self)
+
+        # 将视图添加到堆叠窗口
         self.stacked_widget.addWidget(self.home_view)
         self.stacked_widget.addWidget(self.prediction_view)
         self.stacked_widget.addWidget(self.instruction_view)
@@ -402,9 +427,17 @@ class MainWindow(QMainWindow):
         self.stacked_widget.setCurrentWidget(self.instruction_view)
 
 
+<<<<<<< Updated upstream
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     main = MainWindow()
     main.show()
     sys.exit(app.exec_())
+=======
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     main = MainWindow()
+#     main.show()
+#     sys.exit(app.exec_())
+>>>>>>> Stashed changes
 

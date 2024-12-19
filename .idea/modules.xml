@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< Updated upstream
       <module fileurl="file://$PROJECT_DIR$/.idea/Blind_helper(now).iml" filepath="$PROJECT_DIR$/.idea/Blind_helper(now).iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/Blind_Helper.iml" filepath="$PROJECT_DIR$/.idea/Blind_Helper.iml" />
+>>>>>>> Stashed changes
     </modules>
   </component>
 </project>
